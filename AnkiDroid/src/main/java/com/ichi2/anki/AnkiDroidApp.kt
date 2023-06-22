@@ -48,7 +48,9 @@ import timber.log.Timber
 import timber.log.Timber.DebugTree
 import java.io.InputStream
 import java.util.regex.Pattern
-
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 /**
  * Application class.
  */
@@ -66,6 +68,8 @@ open class AnkiDroidApp : Application() {
      * On application creation.
      */
     override fun onCreate() {
+        AppCenter.start(getApplication(), "b1839b46-b53c-441a-a20f-4e64e5d1dc3e",
+                  Analytics.class, Crashes.class);
         BackendFactory.defaultLegacySchema = BuildConfig.LEGACY_SCHEMA
         try {
             Os.setenv("PLATFORM", Utils.syncPlatform(), false)
